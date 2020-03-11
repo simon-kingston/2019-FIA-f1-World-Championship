@@ -1,5 +1,6 @@
 library(readr)
 library(ggplot2)
+library(plotly)
 
 myfile <- 'https://raw.githubusercontent.com/simon-kingston/2019-FIA-f1-World-Championship/master/data/2019-f1-results.csv'
 
@@ -98,7 +99,7 @@ df1 <- data.frame(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r
 var0 <- as.numeric(df1[1, ])
 var1 <- as.numeric(df1[2, ])
 
-ggplot() + 
+p1 <- ggplot() + 
   geom_line(aes(x=races,y=as.numeric(df1[1, ])), color='cyan', group = 1) + # HAM
   geom_line(aes(x=races,y=as.numeric(df1[2, ])), color='cyan', group = 1) + # BOT
   geom_line(aes(x=races,y=as.numeric(df1[3, ])), color='blue', group = 1) + # VER
@@ -122,12 +123,24 @@ ggplot() +
   ylab('Points')+xlab('Race')+ggtitle('2019 F1 Driver Championship') +
   theme(plot.title = element_text(hjust = 0.5))+ theme_bw()
 
+fig1 <- ggplotly(p1)
+
+fig1
+
 ss <- c(25, 18, 15, 12, 10, 8, 6, 4, 2, 1, 1)
 ss_header <- c('1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', 'Fastest Lap')
 df_ss <- data.frame(position=factor(ss_header, levels=ss_header), points=ss)
 
-ggplot(data=df_ss, aes(x=position, y=points))+geom_bar(stat='identity',fill="red",color='white') + 
+p2 <- ggplot(data=df_ss, aes(x=position, y=points))+geom_bar(stat='identity',fill="red",color='white') + 
 ylab('Points Awarded')+xlab('Position')+ggtitle('Scoring System')+theme(plot.title = element_text(hjust = 0.5))+ theme_bw()
 
- 
+fig2 <- ggplotly(p2)
 
+fig2 
+
+
+aus_construstors <- c(f1_data$Team[complete.cases(f1_data$AUS)], f1_data$AUS[complete.cases(f1_data$AUS)])
+bel_construstors <- c(f1_data$Team[complete.cases(f1_data$BEL)], f1_data$BEL[complete.cases(f1_data$BEL)])
+
+constructors_results_table <-  data.frame(teams, AUS = r1, BHR = r2, CHN = r3, AZE = r4, ESP = r5, MON = r6, CAN = r7, FRA = r8,
+                                          AUT = r9, GBR = r10, GER = r11, HUN = r12, BEL = r13, ITA = r14, SIN = r15, RUS = r16, JPN = r17, MEX = r18, USA = r19, BRA = r20, ABU = r21)
