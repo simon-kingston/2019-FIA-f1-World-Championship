@@ -120,14 +120,14 @@ ggplot() +
   geom_line(aes(x=races,y=as.numeric(df1[19, ])), color='grey', group = 1) + # KUB
   geom_line(aes(x=races,y=as.numeric(df1[20, ])), color='grey', group = 1) + # RUS
   ylab('Points')+xlab('Race')+ggtitle('2019 F1 Driver Championship') +
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5))+ theme_bw()
 
 ss <- c(25, 18, 15, 12, 10, 8, 6, 4, 2, 1, 1)
 ss_header <- c('1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', 'Fastest Lap')
 df_ss <- data.frame(position=factor(ss_header, levels=ss_header), points=ss)
 
 ggplot(data=df_ss, aes(x=position, y=points))+geom_bar(stat='identity',fill="red",color='white') + 
-ylab('Points Awarded')+xlab('Position')+ggtitle('Scoring System')+theme(plot.title = element_text(hjust = 0.5))
+ylab('Points Awarded')+xlab('Position')+ggtitle('Scoring System')+theme(plot.title = element_text(hjust = 0.5))+ theme_bw()
 
  
 
