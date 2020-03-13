@@ -120,7 +120,7 @@ p1 <- ggplot() +
   geom_line(aes(x=races,y=as.numeric(df1[18, ])), color='gold', group = 1) + # # GRO
   geom_line(aes(x=races,y=as.numeric(df1[19, ])), color='grey', group = 1) + # KUB
   geom_line(aes(x=races,y=as.numeric(df1[20, ])), color='grey', group = 1) + # RUS
-  ylab('Points')+xlab('Race')+ggtitle('2019 F1 Driver Championship') +
+  ylab('Points')+xlab('Race')+ggtitle('2019 F1 Drivers Championship') +
   theme(plot.title = element_text(hjust = 0.5))+ theme_bw()
 
 fig1 <- ggplotly(p1)
