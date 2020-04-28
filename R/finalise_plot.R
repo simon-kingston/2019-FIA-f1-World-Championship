@@ -94,22 +94,21 @@ p1 <- ggplot() +
   ylab('Points')+xlab('Race')+ggtitle('2019 F1 Drivers Championship') +
   theme(plot.title = element_text(hjust = 0.5))+ theme_bw()
 
-
-fig1 <- ggplotly(p1)
-
-fig1
-
-
 ss_header <- c('1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', 'Fastest Lap')
 df_ss <- data.frame(position=factor(ss_header, levels=ss_header), points=score_system)
 
 p2 <- ggplot(data=df_ss, aes(x=position, y=points))+geom_bar(stat='identity',fill="red",color='white') + 
 ylab('Points Awarded')+xlab('Position')+ggtitle('Scoring System')+theme(plot.title = element_text(hjust = 0.5))+ theme_bw()
 
-fig2 <- ggplotly(p2)
+# Drivers Championship
+fig1 <- ggplotly(p1)
+fig1
 
+# 2019 Scoring System
+fig2 <- ggplotly(p2)
 fig2 
 
+# Constructors Championship
 
 # aus_construstors <- c(f1_data$Team[complete.cases(f1_data$AUS)], f1_data$AUS[complete.cases(f1_data$AUS)])
 # bel_construstors <- c(f1_data$Team[complete.cases(f1_data$BEL)], f1_data$BEL[complete.cases(f1_data$BEL)])
