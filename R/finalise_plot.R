@@ -68,31 +68,16 @@ driver_results <- function(race_standings, score_system){
 
 df1 <- driver_results(race_standings, score_system)
 races <- factor(names(f1_data)[3:23], levels = names(f1_data)[3:23])
-team_colours <- c('cyan', 'blue', 'red', 'orange', 'light blue', 'yellow', 'pink', 'dark red', 'gold', 'grey')
+team_colours <- c('cyan', 'cyan', 'blue', 'red', 'red', 'orange', 'light blue', 'blue', 'yellow', 'pink', 'orange', 'dark red', 'light blue', 'yellow', 'gold', 'pink', 'dark red', 'gold', 'grey', 'grey')
 
-p1 <- ggplot() + 
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[1, ]))), color=team_colours[1], group = 1)  +# HAM
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[2, ]))), color=team_colours[1], group = 2) + # BOT
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[3, ]))), color=team_colours[2], group = 3) + # VER
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[4, ]))), color=team_colours[3], group = 4) + # LEC
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[5, ]))), color=team_colours[3], group = 5) + # VET
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[6, ]))), color=team_colours[4], group = 6) + # SAI
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[7, ]))), color=team_colours[5], group = 7, linetype=4) + # GAS
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[8, ]))), color=team_colours[2], group = 8, linetype=4) + # ALB
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[9, ]))), color=team_colours[6], group = 9) + # RIC
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[10, ]))), color=team_colours[7], group = 10) + # PER
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[11, ]))), color=team_colours[4], group = 11) + # NOR
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[12, ]))), color=team_colours[8], group = 12) + # RAI
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[13, ]))), color=team_colours[5], group = 13) + # KYV
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[14, ]))), color=team_colours[6], group = 14) + # HUL
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[15, ]))), color=team_colours[9], group = 15) + # MAG
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[16, ]))), color=team_colours[7], group = 16) + # STR
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[17, ]))), color=team_colours[8], group = 17) + # GIO
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[18, ]))), color=team_colours[9], group = 18) + # # GRO
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[19, ]))), color=team_colours[10], group = 19) + # KUB
-  geom_line(aes(x=races,y=cumsum(as.numeric(df1[20, ]))), color=team_colours[10], group = 20) + # RUS
-  ylab('Points')+xlab('Race')+ggtitle('2019 F1 Drivers Championship') +
+p1 <- ggplot() + ylab('Points')+xlab('Race')+ggtitle('2019 F1 Drivers Championship') +
   theme(plot.title = element_text(hjust = 0.5))+ theme_bw()
+
+for (i in 1:20) {
+  # use aes_string with names of the data.frame
+  p1 <- p1 + geom_line(aes_string(x=races,y=cumsum(as.numeric(df1[i, ]))), color=team_colours[i], group = i) 
+}
+# TODO - Add driver names to plot
 
 ss_header <- c('1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', 'Fastest Lap')
 df_ss <- data.frame(position=factor(ss_header, levels=ss_header), points=score_system)
