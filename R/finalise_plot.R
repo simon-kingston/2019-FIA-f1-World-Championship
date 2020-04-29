@@ -75,7 +75,10 @@ p1 <- ggplot() + ylab('Points')+xlab('Race')+ggtitle('2019 F1 Drivers Championsh
 
 for (i in 1:20) {
   # use aes_string with names of the data.frame
-  p1 <- p1 + geom_line(aes_string(x=races,y=cumsum(as.numeric(df1[i, ]))), color=team_colours[i], group = i) 
+  if (i == 7 || i == 8)
+    p1 <- p1 + geom_line(aes_string(x=races,y=cumsum(as.numeric(df1[i, ]))), color=team_colours[i], group = i, linetype=4)
+  else
+    p1 <- p1 + geom_line(aes_string(x=races,y=cumsum(as.numeric(df1[i, ]))), color=team_colours[i], group = i) 
 }
 # TODO - Add driver names to plot
 
